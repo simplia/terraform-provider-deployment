@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go/aws/credentials/stscreds"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"log"
 	"strings"
@@ -52,7 +53,17 @@ func dataSourceSimpliaEcsCurrentDeployment() *schema.Resource {
 
 func dataSourceSimpliaEcsCurrentDeploymentRead(d *schema.ResourceData, meta interface{}) error {
 	awsSession, _ := session.NewSession()
-	ecsClient := ecs.New(awsSession, aws.NewConfig().WithRegion(d.Get("region").(string)))
+
+	config := aws.NewConfig().WithRegion(d.Get("region").(string))
+
+	if meta.(Config).AssumeRoleARN != "" {
+		creds := stscreds.NewCredentials(awsSession, meta.(Config).AssumeRoleARN)
+		config = config.WithCredentials(creds)
+	}
+	ecsClient := ecs.New(
+		awsSession,
+		config,
+	)
 
 	serviceName := d.Get("service").(string)
 	describeServicesInput := &ecs.DescribeServicesInput{
@@ -63,11 +74,11 @@ func dataSourceSimpliaEcsCurrentDeploymentRead(d *schema.ResourceData, meta inte
 	var currentTaskDefinition string
 	services, servicesError := ecsClient.DescribeServices(describeServicesInput)
 
-	if servicesError != nil || len(services.Failures) > 0 {
-		if(servicesError != nil) {
-			log.Println("[SIMPLIA] %s", servicesError.Error())
-		}
+	if servicesError != nil {
+		return servicesError
+	}
 
+	if len(services.Failures) > 0 {
 		d.SetId("default")
 		d.Set("image_digest", d.Get("default_image_digest"))
 		d.Set("image_found", false)

@@ -4,40 +4,61 @@
   "name": "simplia",
   "type": "provider",
   "version": "v1.0.0",
-  "provider": {},
+  "provider": {
+    "assume_role": {
+      "Type": "List",
+      "Optional": true,
+      "MaxItems": 1,
+      "IsBlock": true,
+      "ConfigImplicitMode": "Block",
+      "Elem": {
+        "Type": "SchemaInfo",
+        "Info": {
+          "role_arn": {
+            "Type": "String",
+            "Optional": true,
+            "Description": "The ARN of an IAM role to assume prior to making API calls."
+          },
+          "session_name": {
+            "Type": "String",
+            "Optional": true,
+            "Description": "The session name to use when assuming the role. If omitted, no session name is passed to the AssumeRole call."
+          }
+        }
+      }
+    }
+  },
   "resources": {},
   "data-sources": {
     "simplia_ecs_current_deployment": {
-        "region": {
-          "Type": "String",
-          "Required": true
-        },
-        "cluster": {
-          "Type": "String",
-          "Required": true
-        },
-        "container_name": {
-          "Type": "String",
-          "Required": true
-        },
-        "default_image_digest": {
-          "Type": "String",
-          "Required": true
-        },
-        "service": {
-          "Type": "String",
-          "Required": true
-        },
-
-
-        "image_digest": {
-          "Type": "String",
-          "Computed": true
-        },
-        "image_found": {
-          "Type": "Bool",
-          "Computed": true
-        }
+      "region": {
+        "Type": "String",
+        "Required": true
+      },
+      "cluster": {
+        "Type": "String",
+        "Required": true
+      },
+      "container_name": {
+        "Type": "String",
+        "Required": true
+      },
+      "default_image_digest": {
+        "Type": "String",
+        "Required": true
+      },
+      "service": {
+        "Type": "String",
+        "Required": true
+      },
+      "image_digest": {
+        "Type": "String",
+        "Computed": true
+      },
+      "image_found": {
+        "Type": "Bool",
+        "Computed": true
       }
+    }
   }
 }
