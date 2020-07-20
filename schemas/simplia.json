@@ -1,0 +1,43 @@
+{
+  ".schema_version": "2",
+  ".sdk_type": "terraform-plugin-sdk-v2",
+  "name": "simplia",
+  "type": "provider",
+  "version": "v1.0.0",
+  "provider": {},
+  "resources": {},
+  "data-sources": {
+    "simplia_ecs_current_deployment": {
+        "region": {
+          "Type": "String",
+          "Required": true
+        },
+        "cluster": {
+          "Type": "String",
+          "Required": true
+        },
+        "container_name": {
+          "Type": "String",
+          "Required": true
+        },
+        "default_image_digest": {
+          "Type": "String",
+          "Required": true
+        },
+        "service": {
+          "Type": "String",
+          "Required": true
+        },
+
+
+        "image_digest": {
+          "Type": "String",
+          "Computed": true
+        },
+        "image_found": {
+          "Type": "Bool",
+          "Computed": true
+        }
+      }
+  }
+}
