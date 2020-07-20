@@ -52,12 +52,12 @@ Note our plugin is used to determine image digest **data.simplia_ecs_current_dep
 used image, or default value in case there is none (e. g. first deployment of this service).
 
 
-## Kompilace
+## Compilation
 ```bash
-$  go build -o plugins/terraform-provider-simplia
+$  CGO_ENABLED=0 go build -o plugins/terraform-provider-simplia
 ```
 
-## Zdroje
+## Resources
 * https://github.com/VladRassokhin/intellij-hcl
 * https://github.com/VladRassokhin/terraform-metadata
 * https://www.terraform.io/docs/extend/index.html
