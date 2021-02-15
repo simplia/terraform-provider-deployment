@@ -30,7 +30,7 @@
   },
   "resources": {},
   "data-sources": {
-    "simplia_ecs_current_deployment": {
+    "ecs": {
       "region": {
         "Type": "String",
         "Required": true
