@@ -7,7 +7,7 @@
 
 
 ```hcl-terraform
-data "simplia_ecs_current_deployment" "deployment" {
+data "ecs_current_deployment" "deployment" {
   cluster = module.cluster.cluster_name
   service = "test" # Service name
   container_name = "test" 
@@ -48,7 +48,7 @@ resource "aws_ecs_task_definition" "task" {
 DEFINITION
 }
 ```
-Note our plugin is used to determine image digest **data.simplia_ecs_current_deployment.deployment.image_digest** - it returns currently
+Note our plugin is used to determine image digest **data.ecs_current_deployment.deployment.image_digest** - it returns currently
 used image, or default value in case there is none (e. g. first deployment of this service).
 
 
