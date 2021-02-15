@@ -30,7 +30,7 @@
   },
   "resources": {},
   "data-sources": {
-    "current_deployment_ecs": {
+    "deployment_ecs": {
       "region": {
         "Type": "String",
         "Required": true

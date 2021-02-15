@@ -16,7 +16,7 @@ func Provider() *schema.Provider {
 		},
 
 		DataSourcesMap: map[string]*schema.Resource{
-			"current_deployment_ecs": dataSourceSimpliaEcsCurrentDeployment(),
+			"deployment_ecs": dataSourceSimpliaEcsCurrentDeployment(),
 		},
 	}
 
