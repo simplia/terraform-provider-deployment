@@ -1,9 +1,9 @@
 {
   ".schema_version": "2",
   ".sdk_type": "terraform-plugin-sdk-v2",
-  "name": "simplia",
+  "name": "current-deployment",
   "type": "provider",
-  "version": "v1.0.0",
+  "version": "v0.0.2",
   "provider": {
     "assume_role": {
       "Type": "List",
