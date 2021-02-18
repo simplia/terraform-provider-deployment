@@ -96,7 +96,7 @@ func dataSourceSimpliaEcsCurrentDeploymentRead(d *schema.ResourceData, meta inte
 	taskDefinitionOutput, taskDefinitionError := ecsClient.DescribeTaskDefinition(describeTaskDefinitionInput)
 
 	if taskDefinitionError != nil {
-		log.Println("[SIMPLIA] %s", servicesError.Error())
+		log.Println("[SIMPLIA]", servicesError.Error())
 
 		d.SetId("default")
 		d.Set("image_digest", d.Get("default_image_digest"))
@@ -120,7 +120,7 @@ func dataSourceSimpliaEcsCurrentDeploymentRead(d *schema.ResourceData, meta inte
 	}
 
 	if d.Id() == "" {
-		return fmt.Errorf("Task definition or container with name %q not found.", d.Get("container_name").(string), d.Get("task_definition").(string))
+		return fmt.Errorf("Task definition with name %q not found.", d.Get("container_name").(string), d.Get("task_definition").(string))
 	}
 
 	return nil
