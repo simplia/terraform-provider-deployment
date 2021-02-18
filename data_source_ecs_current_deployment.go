@@ -120,7 +120,7 @@ func dataSourceSimpliaEcsCurrentDeploymentRead(d *schema.ResourceData, meta inte
 	}
 
 	if d.Id() == "" {
-		return fmt.Errorf("Task definition with name %q not found.", d.Get("container_name").(string), d.Get("task_definition").(string))
+		return fmt.Errorf("Task definition with name %q or container with name %q not found.", d.Get("container_name").(string), d.Get("task_definition").(string))
 	}
 
 	return nil
